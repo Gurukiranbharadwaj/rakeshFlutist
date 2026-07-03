@@ -4,6 +4,7 @@ const LazySection = ({ children, minHeight = '300px', className = '' }) => {
     const [isIntersecting, setIsIntersecting] = useState(false);
     const [measuredHeight, setMeasuredHeight] = useState(null);
     const ref = useRef(null);
+    const contentRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -11,9 +12,9 @@ const LazySection = ({ children, minHeight = '300px', className = '' }) => {
                 setIsIntersecting(entry.isIntersecting);
             },
             {
-                root: null, // use viewport
-                rootMargin: '250px', // start loading early for smooth scroll transitions
-                threshold: 0.01 // trigger as soon as 1% is visible
+                root: null,
+                rootMargin: '300px', // start loading early for seamless rendering
+                threshold: 0.001
             }
         );
 
@@ -29,35 +30,35 @@ const LazySection = ({ children, minHeight = '300px', className = '' }) => {
     }, []);
 
     useEffect(() => {
-        if (isIntersecting && ref.current) {
-            const handleResize = () => {
-                const rect = ref.current.getBoundingClientRect();
-                if (rect.height > 0) {
-                    setMeasuredHeight(rect.height);
+        if (isIntersecting && contentRef.current) {
+            const resizeObserver = new ResizeObserver((entries) => {
+                for (let entry of entries) {
+                    const height = entry.contentRect.height;
+                    if (height > 0) {
+                        setMeasuredHeight(height);
+                    }
                 }
-            };
-            
-            // Measure height immediately once mounted
-            handleResize();
+            });
 
-            // Handle window resizing to keep heights responsive
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
+            resizeObserver.observe(contentRef.current);
+            return () => {
+                resizeObserver.disconnect();
+            };
         }
     }, [isIntersecting]);
 
-    const currentMinHeight = measuredHeight ? `${measuredHeight}px` : minHeight;
+    const style = {
+        minHeight: measuredHeight ? `${measuredHeight}px` : minHeight,
+        width: '100%'
+    };
 
     return (
-        <div 
-            ref={ref} 
-            className={className} 
-            style={{ 
-                minHeight: currentMinHeight,
-                width: '100%'
-            }}
-        >
-            {isIntersecting ? children : null}
+        <div ref={ref} className={className} style={style}>
+            {isIntersecting ? (
+                <div ref={contentRef} style={{ width: '100%' }}>
+                    {children}
+                </div>
+            ) : null}
         </div>
     );
 };
