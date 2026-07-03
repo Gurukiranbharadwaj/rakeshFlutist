@@ -378,6 +378,68 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* ─── Spotify Album Section ─── */}
+            <section className="section-pad position-relative z-1" style={{ borderBottom: '1px solid rgba(212,175,55,0.05)' }}>
+                <div className="container">
+                    <div className="row align-items-center g-5">
+                        <motion.div
+                            className="col-lg-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={fadeInUp}
+                        >
+                            <p className="text-gradient-accent fw-bold mb-2" style={{ letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                                Featured Release
+                            </p>
+                            <h2 className="display-4 fw-bold text-cream text-glow-white mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                Varnams Volume 01
+                            </h2>
+                            <div className="gold-divider mt-2 mb-4 mx-0" style={{ margin: '0 0 1rem 0' }}></div>
+                            <p className="fs-5 lh-lg mb-4 text-cream-muted">
+                                Taana varnams rendered by veteran Indian Bamboo Flautist, Rakesh Dath. Immerse yourself in the pureness of Indian carnatic ragas: <strong>Mohana, Hamsadhwani, Abhogi &amp; Kalyani</strong>.
+                            </p>
+                            <p className="fs-5 lh-lg mb-4 text-cream-muted">
+                                Specially curated for music enthusiasts and learners who want to understand the structure of Varnams.
+                            </p>
+                            <div className="mt-4 pt-2">
+                                <a
+                                    href="https://open.spotify.com/album/2kR5s0R5s6GSqQt5EAngLZ?si=oBQNxMqiQo2DVZsFjchNYQ"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-primary btn-lg rounded-pill px-4 shadow hover-glow d-inline-flex align-items-center"
+                                >
+                                    <i className="bi bi-spotify me-2 fs-4" style={{ color: '#1DB954' }}></i>
+                                    Listen on Spotify
+                                </a>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            className="col-lg-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={fadeInUp}
+                        >
+                            <div className="glass-card p-3 rounded-4 hover-glow" style={{ background: 'rgba(11, 18, 32, 0.4)' }}>
+                                <iframe
+                                    style={{ borderRadius: '12px', display: 'block' }}
+                                    src="https://open.spotify.com/embed/album/2kR5s0R5s6GSqQt5EAngLZ?utm_source=generator&theme=0"
+                                    width="100%"
+                                    height="352"
+                                    frameBorder="0"
+                                    allowFullScreen=""
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-view"
+                                    loading="lazy"
+                                    title="Spotify Album - Varnams Volume 01"
+                                ></iframe>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* ─── Performance Videos ─── */}
             <ParallaxSection
                 desktopImage={galleryHeroD}
