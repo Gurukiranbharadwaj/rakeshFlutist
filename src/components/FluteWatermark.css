@@ -1,21 +1,3 @@
-@keyframes floatWatermark {
-    0% {
-        transform: translate(0px, 0px) rotate(var(--rotation));
-    }
-
-    33% {
-        transform: translate(var(--tx-1, 15vw), var(--ty-1, -20vh)) rotate(calc(var(--rotation) + 20deg));
-    }
-
-    66% {
-        transform: translate(var(--tx-2, -20vw), var(--ty-2, 25vh)) rotate(calc(var(--rotation) - 15deg));
-    }
-
-    100% {
-        transform: translate(0px, 0px) rotate(var(--rotation));
-    }
-}
-
-.watermark-float {
-    animation: floatWatermark var(--duration, 40s) ease-in-out infinite;
+.watermark-static {
+    transition: opacity 0.5s ease-in-out;
 }
