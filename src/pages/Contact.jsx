@@ -206,7 +206,7 @@ const Contact = () => {
                                         </form>
                                     ) : (
                                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                                            <a href="/downloads/Rakesh_Dath_Media_Kit.zip" download="Rakesh_Dath_Media_Kit.zip" className="btn btn-primary rounded-pill px-4 fw-bold w-100 py-2">
+                                            <a href="./downloads/Rakesh_Dath_Media_Kit.zip" download="Rakesh_Dath_Media_Kit.zip" className="btn btn-primary rounded-pill px-4 fw-bold w-100 py-2">
                                                 <i className="bi bi-download me-2"></i>Download .zip
                                             </a>
                                         </motion.div>
