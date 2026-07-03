@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedPage from '../components/AnimatedPage';
 import ParallaxSection, { breathIn } from '../components/ParallaxSection';
+import LazySection from '../components/LazySection';
 import './Gallery.css';
 
 // Hero Images
@@ -102,43 +103,62 @@ const Gallery = () => {
                             columnGap: '2rem'
                         }}
                     >
-                        {images.map((img, index) => (
-                            <motion.div
-                                key={img.id}
-                                style={{
-                                    breakInside: 'avoid',
-                                    marginBottom: '2rem',
-                                    display: 'inline-block',
-                                    width: '100%'
-                                }}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, margin: '-50px' }}
-                                variants={breathIn}
-                                transition={{ delay: (index % 3) * 0.1 }}
-                            >
-                                <div className="rounded-4 overflow-hidden shadow-lg hover-glow img-overlay-inner bg-midnight border border-secondary border-opacity-25" style={{ borderColor: 'rgba(212, 175, 55, 0.15) !important' }}>
-                                    <img
-                                        src={img.src}
-                                        alt={img.alt}
+                        {images.map((img, index) => {
+                            const getMinHeight = (ratio) => {
+                                switch (ratio) {
+                                    case '3/4': return '400px';
+                                    case '1/1': return '300px';
+                                    case '16/9': return '170px';
+                                    case '3/2': return '200px';
+                                    case '4/5': return '375px';
+                                    case '1/2': return '600px';
+                                    default: return '300px';
+                                }
+                            };
+                            return (
+                                <LazySection
+                                    key={img.id}
+                                    minHeight={getMinHeight(img.ratio)}
+                                    className="d-inline-block w-100"
+                                    style={{ breakInside: 'avoid', marginBottom: '2rem' }}
+                                >
+                                    <motion.div
                                         style={{
-                                            width: '100%',
-                                            display: 'block',
-                                            aspectRatio: img.ratio,
-                                            objectFit: 'cover',
-                                            objectPosition: 'center top',
-                                            transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)'
+                                            breakInside: 'avoid',
+                                            marginBottom: '2rem',
+                                            display: 'inline-block',
+                                            width: '100%'
                                         }}
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div className="text-center mt-3">
-                                    <p className="mb-0 small fw-bold text-uppercase text-gradient-accent" style={{ letterSpacing: '0.1em' }}>
-                                        {img.caption}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, margin: '-50px' }}
+                                        variants={breathIn}
+                                        transition={{ delay: (index % 3) * 0.1 }}
+                                    >
+                                        <div className="rounded-4 overflow-hidden shadow-lg hover-glow img-overlay-inner bg-midnight border border-secondary border-opacity-25" style={{ borderColor: 'rgba(212, 175, 55, 0.15) !important' }}>
+                                            <img
+                                                src={img.src}
+                                                alt={img.alt}
+                                                style={{
+                                                    width: '100%',
+                                                    display: 'block',
+                                                    aspectRatio: img.ratio,
+                                                    objectFit: 'cover',
+                                                    objectPosition: 'center top',
+                                                    transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)'
+                                                }}
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <div className="text-center mt-3">
+                                            <p className="mb-0 small fw-bold text-uppercase text-gradient-accent" style={{ letterSpacing: '0.1em' }}>
+                                                {img.caption}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                </LazySection>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
