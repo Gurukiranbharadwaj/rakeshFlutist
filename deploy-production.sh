@@ -12,6 +12,9 @@ npm run build
 echo "Navigating to build output directory..."
 cd dist
 
+# Clean up any existing git repository to avoid state conflicts
+rm -rf .git
+
 echo "Initializing temporary git repository..."
 git init
 git checkout -B production
