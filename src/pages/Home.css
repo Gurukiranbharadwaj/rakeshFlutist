@@ -1,0 +1,56 @@
+/* Cinematic Animations */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.ken-burns {
+    animation: kenBurns 20s ease-out forwards;
+}
+
+@keyframes floatDust {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-40px) translateX(-10px);
+        opacity: 0;
+    }
+}
+
+.particles-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    /* Below text, above background */
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(212, 175, 55, 0.4);
+    border-radius: 50%;
+    animation: floatDust linear infinite;
+}
+
+/* Radial Glow utility for Hero */
+.radial-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0) 60%);
+    z-index: 1;
+    pointer-events: none;
+}

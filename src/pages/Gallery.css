@@ -1,0 +1,12 @@
+/* Gallery masonry */
+@media (max-width: 991px) {
+    .gallery-masonry {
+        column-count: 2 !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .gallery-masonry {
+        column-count: 1 !important;
+    }
+}

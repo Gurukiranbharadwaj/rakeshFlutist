@@ -1,0 +1,33 @@
+/* Styles specific to the Contact page */
+
+/* Custom Input Fields for Dark Glassmorphism Theme */
+.custom-form-input {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    color: #F8F5F2 !important; /* Cream color */
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+/* Placeholders must be clearly legible */
+.custom-form-input::placeholder {
+    color: rgba(248, 245, 242, 0.5) !important;
+}
+
+/* Focus state matching golden theme */
+.custom-form-input:focus {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    border-color: rgba(212, 175, 55, 0.9) !important;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25) !important;
+    color: #F8F5F2 !important;
+}
+
+/* Fix annoying browser autofill forcing white backgrounds */
+.custom-form-input:-webkit-autofill,
+.custom-form-input:-webkit-autofill:hover,
+.custom-form-input:-webkit-autofill:focus,
+.custom-form-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 50px rgba(20, 20, 20, 1) inset !important;
+    -webkit-text-fill-color: #F8F5F2 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}

@@ -1,0 +1,80 @@
+/* Navbar Enhancements */
+.navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+    /* Force hardware acceleration to prevent fixed elements slipping during scroll on iOS/Safari */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    width: 100%;
+}
+
+.navbar.scrolled {
+    background: rgba(11, 18, 32, 0.85) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.nav-link {
+    font-family: var(--font-nav);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    position: relative;
+    padding-bottom: 4px !important;
+    color: var(--color-cream-muted) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.nav-link.active {
+    color: var(--color-ochre) !important;
+    font-weight: 600;
+}
+
+/* Mobile Navbar Customizations */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(11, 18, 32, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    .nav-link {
+        padding: 0.8rem 1rem !important;
+        display: inline-block;
+    }
+
+    .navbar-nav .btn-primary {
+        width: 100%;
+        max-width: 300px;
+        margin: 0.5rem auto 0;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+}

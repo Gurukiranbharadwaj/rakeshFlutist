@@ -1,0 +1,415 @@
+:root {
+  /* Color Palette - Cinematic Fusion Luxury */
+  --color-midnight: #0B1220;
+  /* Midnight Blue */
+  --color-purple: #3B1E6D;
+  /* Deep Royal Purple */
+  --color-gold: #D4AF37;
+  /* Rich Gold */
+  --color-amber: #F59E0B;
+  /* Warm Amber */
+  --color-cream: #FFF;
+  /* Pure White for crispness on dark */
+  --color-cream-muted: #E2E8F0;
+  /* Muted text */
+  --color-charcoal: #0B1220;
+  /* Legacy mappings */
+  --color-ochre: #D4AF37;
+
+  /* Rich Gradients */
+  --gradient-bg: linear-gradient(135deg, var(--color-midnight) 0%, var(--color-purple) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-gold) 0%, var(--color-amber) 100%);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-nav: 'Outfit', sans-serif;
+  --font-accent: 'Dancing Script', cursive;
+
+  /* Motion */
+  --transition-breath: 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-musical: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html {
+  font-size: 15.5px;
+  /* Slightly reduced base for desktop */
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+    /* More reduction for mobile */
+  }
+}
+
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.45;
+  background: var(--color-midnight);
+  color: var(--color-cream-muted);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Hardware accelerated fixed background to prevent scroll lag instead of background-attachment: fixed */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10vh -10vw; /* bleed out to avoid mobile browser toolbar jump showing edges */
+  z-index: -1;
+  background-image: var(--gradient-bg);
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+.lh-lg {
+  line-height: 1.65 !important;
+  /* Reduced from 2.0 */
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+  font-family: var(--font-heading);
+  color: var(--color-cream);
+  font-weight: 600;
+}
+
+/* Base Link Styling */
+a {
+  color: var(--color-ochre);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+/* Custom Utilities */
+.bg-cream {
+  background-color: transparent !important;
+}
+
+.bg-charcoal {
+  background-color: transparent !important;
+}
+
+.bg-ochre {
+  background: var(--gradient-accent) !important;
+}
+
+.text-cream {
+  color: var(--color-cream) !important;
+}
+
+.text-charcoal {
+  color: var(--color-cream) !important;
+}
+
+/* Mapped for dark theme */
+.text-charcoal-light {
+  color: var(--color-cream-muted) !important;
+}
+
+.text-ochre {
+  color: var(--color-gold) !important;
+}
+
+.text-gold {
+  color: var(--color-gold) !important;
+}
+
+.border-ochre {
+  border-color: var(--color-gold) !important;
+}
+
+.text-gradient-accent {
+  background: var(--gradient-accent);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.8),
+    0 0 20px rgba(245, 158, 11, 0.6),
+    0 0 40px rgba(212, 175, 55, 0.4);
+  color: #fff;
+  /* Base color for transition to gold gradient */
+}
+
+.text-golden-glow {
+  color: #D4AF37;
+  text-shadow:
+    0 0 10px rgba(212, 175, 55, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.6),
+    0 0 30px rgba(184, 134, 11, 0.8),
+    0 0 50px rgba(139, 101, 8, 0.6);
+  display: inline-block;
+}
+
+
+.text-glow-white {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+}
+
+.glass-card {
+  background: rgba(11, 18, 32, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  /* Subtle gold border */
+  border-radius: 16px;
+  transition: var(--transition-smooth);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-4px);
+}
+
+/* Primary Button - Premium Cinematic Style */
+.btn-primary {
+  background: var(--gradient-accent);
+  border: none;
+  color: #000 !important;
+  /* High contrast on gold */
+  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  /* Modern pill shape */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Button Shimmer Sweep Effect */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  z-index: 1;
+  /* Move above background but below text if possible, or just use mix-blend-mode */
+  transition: none;
+  pointer-events: none;
+}
+
+
+.btn-primary:hover::after,
+.btn-primary:focus::after {
+  left: 150%;
+  transition: all 0.6s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+  color: #000 !important;
+  background: var(--gradient-accent);
+}
+
+
+/* Secondary/Outline Button */
+.btn-outline-primary {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--color-cream);
+  border-color: var(--color-amber);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* Enhancements */
+
+
+/* Ghost Gold Button */
+.btn-ghost-gold {
+  background: transparent;
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-weight: 500;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  transition: var(--transition-smooth);
+}
+
+.btn-ghost-gold:hover,
+.btn-ghost-gold:focus {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--color-cream);
+  border-color: var(--color-amber);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+}
+
+/* Hover lift effect for cards */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+}
+
+
+
+
+/* Breath-like entrance animation */
+@keyframes breathIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-breath {
+  animation: breathIn var(--transition-breath);
+}
+
+/* Staggered text appearance */
+.stagger-item {
+  opacity: 0;
+}
+
+/* Section styling with vertical space for musical flow */
+.section-musical {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (max-width: 768px) {
+  .section-musical {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ochre);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Text Shadows for legibility on images */
+.text-shadow {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.85);
+}
+
+/* Gold divider */
+.gold-divider {
+  height: 3px;
+  width: 60px;
+  background: linear-gradient(90deg, var(--color-ochre), var(--color-gold));
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* Card improvements */
+.card {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Section gap */
+.section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 767px) {
+  .section-pad {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+
+
+/* Video player styling */
+video {
+  background: #000;
+}
+
+/* Form styles */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.2);
+}
+
+/* Font heading class */
+.font-heading {
+  font-family: var(--font-heading);
+}

@@ -1,0 +1,83 @@
+.social-float-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1050;
+    pointer-events: none;
+}
+
+.social-float-container a {
+    pointer-events: auto;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-float-container a:hover {
+    transform: scale(1.1) translateY(-5px);
+    color: white;
+}
+
+.whatsapp-float {
+    background-color: #25d366;
+    animation: whatsappPulse 2s infinite;
+}
+
+.insta-float {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    animation: instaPulse 2s infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+@keyframes instaPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(214, 36, 159, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(214, 36, 159, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(214, 36, 159, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    .social-float-container {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+
+    .social-float-container a {
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
+    }
+}
