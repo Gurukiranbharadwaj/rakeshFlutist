@@ -14,7 +14,7 @@ cd dist
 
 echo "Initializing temporary git repository..."
 git init
-git checkout -b production
+git checkout -B production
 
 # Configure local git settings inside the temporary directory
 git config user.name "Gurukiranbharadwaj"
