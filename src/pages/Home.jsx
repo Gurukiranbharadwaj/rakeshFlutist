@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import AnimatedPage from '../components/AnimatedPage';
 import ParallaxSection, { breathIn } from '../components/ParallaxSection';
 import SoundwaveDivider from '../components/SoundwaveDivider';
-import LazySection from '../components/LazySection';
 import './Home.css';
 import '../components/Testimonial.css';
 
@@ -81,6 +80,62 @@ const TestimonialItem = ({ img, idx }) => {
                 )}
             </div>
         </motion.div>
+    );
+};
+
+const YouTubeFacade = ({ videoId, title, aspectRatio = '16/9', maxHeight }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+    if (isPlaying) {
+        return (
+            <iframe
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+                title={title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="w-100 d-block"
+                style={{ aspectRatio, maxHeight, border: 0 }}
+            ></iframe>
+        );
+    }
+
+    return (
+        <div 
+            onClick={() => setIsPlaying(true)}
+            className="position-relative w-100 overflow-hidden"
+            style={{ aspectRatio, maxHeight, cursor: 'pointer' }}
+        >
+            <motion.img 
+                src={thumbnailUrl} 
+                alt={title} 
+                className="w-100 h-100"
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4 }}
+            />
+            <div 
+                className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                style={{ background: 'rgba(0,0,0,0.35)' }}
+            >
+                <motion.div 
+                    className="d-flex align-items-center justify-content-center rounded-circle"
+                    style={{ 
+                        width: '68px', 
+                        height: '68px', 
+                        background: 'rgba(212, 175, 55, 0.9)', 
+                        border: '2px solid #d4af37',
+                        boxShadow: '0 0 20px rgba(212, 175, 55, 0.4)'
+                    }}
+                    whileHover={{ scale: 1.15, backgroundColor: 'rgba(212, 175, 55, 1)' }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <i className="bi bi-play-fill fs-2" style={{ marginLeft: '4px', color: '#0b0f19' }}></i>
+                </motion.div>
+            </div>
+        </div>
     );
 };
 
@@ -381,79 +436,76 @@ const Home = () => {
             </section>
 
             {/* ─── Spotify Album Section ─── */}
-            <LazySection minHeight="400px">
-                <section className="section-pad position-relative z-1" style={{ borderBottom: '1px solid rgba(212,175,55,0.05)' }}>
-                    <div className="container">
-                        <div className="row align-items-center g-5">
-                            <motion.div
-                                className="col-lg-6"
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={fadeInUp}
-                            >
-                                <p className="text-gradient-accent fw-bold mb-2" style={{ letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                                    Featured Release
-                                </p>
-                                <h2 className="display-4 fw-bold text-cream text-glow-white mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-                                    Varnams Volume 01
-                                </h2>
-                                <div className="gold-divider mt-2 mb-4 mx-0" style={{ margin: '0 0 1rem 0' }}></div>
-                                <p className="fs-5 lh-lg mb-4 text-cream-muted">
-                                    Taana varnams rendered by veteran Indian Bamboo Flautist, Rakesh Dath. Immerse yourself in the pureness of Indian carnatic ragas: <strong>Mohana, Hamsadhwani, Abhogi &amp; Kalyani</strong>.
-                                </p>
-                                <p className="fs-5 lh-lg mb-4 text-cream-muted">
-                                    Specially curated for music enthusiasts and learners who want to understand the structure of Varnams.
-                                </p>
-                                <div className="mt-4 pt-2">
-                                    <a
-                                        href="https://open.spotify.com/album/2kR5s0R5s6GSqQt5EAngLZ?si=oBQNxMqiQo2DVZsFjchNYQ"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn btn-primary btn-lg rounded-pill px-4 shadow hover-glow d-inline-flex align-items-center"
-                                    >
-                                        <i className="bi bi-spotify me-2 fs-4" style={{ color: '#1DB954' }}></i>
-                                        Listen on Spotify
-                                    </a>
-                                </div>
-                            </motion.div>
+            <section className="section-pad position-relative z-1" style={{ borderBottom: '1px solid rgba(212,175,55,0.05)' }}>
+                <div className="container">
+                    <div className="row align-items-center g-5">
+                        <motion.div
+                            className="col-lg-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={fadeInUp}
+                        >
+                            <p className="text-gradient-accent fw-bold mb-2" style={{ letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                                Featured Release
+                            </p>
+                            <h2 className="display-4 fw-bold text-cream text-glow-white mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                Varnams Volume 01
+                            </h2>
+                            <div className="gold-divider mt-2 mb-4 mx-0" style={{ margin: '0 0 1rem 0' }}></div>
+                            <p className="fs-5 lh-lg mb-4 text-cream-muted">
+                                Taana varnams rendered by veteran Indian Bamboo Flautist, Rakesh Dath. Immerse yourself in the pureness of Indian carnatic ragas: <strong>Mohana, Hamsadhwani, Abhogi &amp; Kalyani</strong>.
+                            </p>
+                            <p className="fs-5 lh-lg mb-4 text-cream-muted">
+                                Specially curated for music enthusiasts and learners who want to understand the structure of Varnams.
+                            </p>
+                            <div className="mt-4 pt-2">
+                                <a
+                                    href="https://open.spotify.com/album/2kR5s0R5s6GSqQt5EAngLZ?si=oBQNxMqiQo2DVZsFjchNYQ"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-primary btn-lg rounded-pill px-4 shadow hover-glow d-inline-flex align-items-center"
+                                >
+                                    <i className="bi bi-spotify me-2 fs-4" style={{ color: '#1DB954' }}></i>
+                                    Listen on Spotify
+                                </a>
+                            </div>
+                        </motion.div>
 
-                            <motion.div
-                                className="col-lg-6"
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={fadeInUp}
-                            >
-                                <div className="glass-card p-3 rounded-4 hover-glow" style={{ background: 'rgba(11, 18, 32, 0.4)' }}>
-                                    <iframe
-                                        style={{ borderRadius: '12px', display: 'block' }}
-                                        src="https://open.spotify.com/embed/album/2kR5s0R5s6GSqQt5EAngLZ?utm_source=generator&theme=0"
-                                        width="100%"
-                                        height="352"
-                                        frameBorder="0"
-                                        allowFullScreen=""
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-view"
-                                        loading="lazy"
-                                        title="Spotify Album - Varnams Volume 01"
-                                    ></iframe>
-                                </div>
-                            </motion.div>
-                        </div>
+                        <motion.div
+                            className="col-lg-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={fadeInUp}
+                        >
+                            <div className="glass-card p-3 rounded-4 hover-glow" style={{ background: 'rgba(11, 18, 32, 0.4)' }}>
+                                <iframe
+                                    style={{ borderRadius: '12px', display: 'block' }}
+                                    src="https://open.spotify.com/embed/album/2kR5s0R5s6GSqQt5EAngLZ?utm_source=generator&theme=0"
+                                    width="100%"
+                                    height="352"
+                                    frameBorder="0"
+                                    allowFullScreen=""
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-view"
+                                    loading="lazy"
+                                    title="Spotify Album - Varnams Volume 01"
+                                ></iframe>
+                            </div>
+                        </motion.div>
                     </div>
-                </section>
-            </LazySection>
+                </div>
+            </section>
 
             {/* ─── Performance Videos ─── */}
-            <LazySection minHeight="800px">
-                <ParallaxSection
-                    desktopImage={galleryHeroD}
-                    mobileImage={galleryHeroM}
-                    className="text-cream"
-                    speed={0.12}
-                >
+            <ParallaxSection
+                desktopImage={galleryHeroD}
+                mobileImage={galleryHeroM}
+                className="text-cream"
+                speed={0.12}
+            >
+                <div className="text-center mb-5">
                     <motion.div
-                        className="text-center mb-5"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
@@ -463,65 +515,52 @@ const Home = () => {
                         <h2 className="text-cream text-glow-white display-5 fw-bold text-shadow">Performance Gallery</h2>
                         <div className="gold-divider mt-3"></div>
                     </motion.div>
+                </div>
 
-                    {/* Feature Video */}
-                    <motion.div
-                        className="row justify-content-center mb-5"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <div className="col-lg-9">
-                            <div className="rounded-4 overflow-hidden shadow-lg hover-lift bg-black border border-secondary border-opacity-10">
-                                <iframe
-                                    src="https://www.youtube.com/embed/k3qc59LduMY?si=U0KyFziRNWEhQ0_r"
-                                    title="Featured Performance"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                    loading="lazy"
-                                    className="w-100 d-block"
-                                    style={{ aspectRatio: '16/9', maxHeight: '600px' }}
-                                ></iframe>
-                            </div>
+                {/* Feature Video */}
+                <motion.div
+                    className="row justify-content-center mb-5"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInUp}
+                >
+                    <div className="col-lg-9">
+                        <div className="rounded-4 overflow-hidden shadow-lg hover-lift bg-black border border-secondary border-opacity-10">
+                            <YouTubeFacade
+                                videoId="k3qc59LduMY"
+                                title="Featured Performance"
+                                maxHeight="600px"
+                            />
                         </div>
-                    </motion.div>
+                    </div>
+                </motion.div>
 
-                    {/* Secondary Videos */}
-                    <motion.div
-                        className="row g-4"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                    >
-                        {[
-                            { src: "https://www.youtube.com/embed/RRljMtQpsQE?si=2t4mk0NsCKD7PKRr" },
-                            { src: "https://www.youtube.com/embed/hxJWrk3Ke8I?si=fXxgpYHJCCa4Aqwd" },
-                            { src: "https://www.youtube.com/embed/erhzpU-rhDM?si=lZ0PXLbEqIyVZGJX" },
-                            { src: "https://www.youtube.com/embed/L6f-SqB6jmc?si=3guaD4qC7OPQgyLR" },
-                        ].map((video, idx) => (
-                            <motion.div key={idx} variants={fadeInUp} className="col-md-6">
-                                <div className="rounded-4 overflow-hidden shadow-lg hover-lift bg-black border border-secondary border-opacity-10">
-                                    <iframe
-                                        src={video.src}
-                                        title={`Performance ${idx + 1}`}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerPolicy="strict-origin-when-cross-origin"
-                                        allowFullScreen
-                                        loading="lazy"
-                                        className="w-100 d-block"
-                                        style={{ aspectRatio: '16/9' }}
-                                    ></iframe>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </ParallaxSection>
-            </LazySection>
+                {/* Secondary Videos */}
+                <motion.div
+                    className="row g-4"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={staggerContainer}
+                >
+                    {[
+                        { id: "RRljMtQpsQE" },
+                        { id: "hxJWrk3Ke8I" },
+                        { id: "erhzpU-rhDM" },
+                        { id: "L6f-SqB6jmc" },
+                    ].map((video, idx) => (
+                        <motion.div key={idx} variants={fadeInUp} className="col-md-6">
+                            <div className="rounded-4 overflow-hidden shadow-lg hover-lift bg-black border border-secondary border-opacity-10">
+                                <YouTubeFacade
+                                    videoId={video.id}
+                                    title={`Performance ${idx + 1}`}
+                                />
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </ParallaxSection>
 
             {/* ─── CTA Banner ─── */}
             <section className="glass-panel py-5 text-center my-5 mx-3 mx-md-5 z-2 position-relative">
